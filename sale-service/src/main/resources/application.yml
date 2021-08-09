@@ -1,0 +1,23 @@
+server:
+  port: 8021
+
+spring:
+  application:
+    name: sale-service
+
+  data:
+    mongodb:
+      authentication-database: admin
+      username: root
+      password: example
+      database: ${spring.application.name}
+      port: 27017
+      host: localhost
+  cloud:
+    stream:
+      bindings:
+        SaleConsumer-in-0:
+          group: ${spring.application.name}
+          destination: sales-updated-v1
+        SaleProducer-out-0:
+          destination: sales-created-v1

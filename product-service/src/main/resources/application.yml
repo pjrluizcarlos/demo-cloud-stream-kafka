@@ -1,0 +1,28 @@
+server.port: 8020
+
+spring:
+  application.name: product-service
+
+  data.mongodb:
+      authentication-database: admin
+      username: root
+      password: example
+      database: product-service
+      port: 27017
+      host: localhost
+
+  cloud:
+    stream:
+      kafka:
+        bindings:
+          SaleProcessor-in-0:
+            consumer:
+              enableDlq: true
+              dlqName: sales-created-dlq-v1
+
+      bindings:
+        SaleProcessor-in-0:
+          destination: sales-created-v1
+          group: ${spring.application.name}
+        SaleProcessor-out-0:
+          destination: sales-updated-v1

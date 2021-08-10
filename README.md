@@ -5,7 +5,7 @@
 
 ### Kafka and Mongo DB infrastructure
 
-Run docker-compose commands by script (chmod only in first execution)
+To set up infra, run docker-compose commands by script **(chmod only in first execution)**:
 ```
 cd ./demo-cloud-stream-kafka
 chmod +x ./infra-restart.sh 
@@ -20,6 +20,22 @@ docker-compose -f ./kafka/docker-compose.yml down
 docker-compose -f ./mongodb/docker-compose.yml down
 docker-compose -f ./kafka/docker-compose.yml up -d
 docker-compose -f ./mongodb/docker-compose.yml up -d
+```
+
+---
+
+After execution, tear down infra with **(chmod only in first execution)**:
+```
+chmod +x ./infra-down.sh 
+./infra-down.sh
+```
+
+**OR**
+
+Run docker-compose manually:
+```
+docker-compose -f ./kafka/docker-compose.yml down
+docker-compose -f ./mongodb/docker-compose.yml down
 ```
 
 ### The Problem
@@ -75,6 +91,7 @@ There are two applications in this repository:
 - Implement **reactive programming** in this example
 - Create **integration tests**
 - Create **unit tests**
+- Optimize dependencies (removing unused, moving common dependencies to parent...)
 
 ### Reference Documentation
 
